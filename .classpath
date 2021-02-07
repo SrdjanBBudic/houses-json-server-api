@@ -91,5 +91,6 @@
 	<classpathentry kind="lib" path="src/lib/xml-path-4.3.3-sources.jar"/>
 	<classpathentry kind="lib" path="src/lib/json-20201115.jar"/>
 	<classpathentry kind="lib" path="src/lib/junit-jupiter-api-5.7.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
