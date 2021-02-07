@@ -52,7 +52,7 @@ public class HousesTestSuite {
 	               .queryParam("price_lte", "900000")
 	               .queryParam("city", "Austin")
 	               .when().get("houses")
-	               .then().extract().response().asString();
+	               .then().assertThat().statusCode(200).extract().response().asString();
 		
 		
 		JSONArray houses = rawStringToJsonArray(housesRaw);
@@ -84,14 +84,14 @@ public class HousesTestSuite {
 	
 	
 	@Test
-	public void housesCheckIfArrayIsEmptyWhenParametersCantReadAnything() {
+	public void housesCheckIfArrayIsEmptyWhenNoHousesMatchTheParameters() {
 		
 		String housesRaw = given()
 	               .queryParam("price_gte", "200000")
 	               .queryParam("price_lte", "210000")
-	               .queryParam("city", "Austin")
+	               .queryParam("city", "Belgrade")
 	               .when().get("houses")
-	               .then().extract().response().asString();
+	               .then().assertThat().statusCode(200).extract().response().asString();
 		
 		
 		JSONArray houses = rawStringToJsonArray(housesRaw);
