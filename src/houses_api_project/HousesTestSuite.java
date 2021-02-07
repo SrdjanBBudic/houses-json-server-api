@@ -45,7 +45,7 @@ public class HousesTestSuite {
 	
 	
 	@Test
-	public void housesCheckIfAllKeysArePresent() {
+	public void housesCheckIfAllKeysArePresentAndThatAllKeysArePopulated() {
 		
 		String housesRaw = given()
 	               .queryParam("price_gte", "200000")
@@ -60,23 +60,40 @@ public class HousesTestSuite {
 	
 		for(int i = 0; i < houses.length(); i++) {
 			JSONObject house = houses.getJSONObject(i);
-			house.get("id");
-			house.get("mls_id");
-			house.get("mls_listing_id");
-			house.get("property_type");
-			house.get("formatted_address");
-			house.get("address");
-			house.get("zip");
-			house.get("city");
-			house.get("state");
-			house.get("location");
-			house.get("bedrooms");
-			house.get("bathrooms");
-			house.get("list_date");
-			house.get("mls_update_date");
-			house.get("price_display");
-			house.get("price");
-			house.get("square_feet");
+			Object houseID = house.get("id");
+			assert houseID != null;
+			Object houseMlsId = house.get("mls_id");
+			assert houseMlsId != null;
+			Object houseMlsListingId = house.get("mls_listing_id");
+			assert houseMlsListingId != null;
+			Object housePropertType = house.get("property_type");
+			assert housePropertType != null;
+			Object houseFormattedAdress = house.get("formatted_address");
+			assert houseFormattedAdress != null;
+			Object houseAdress = house.get("address");
+			assert houseAdress != null;
+			Object houseZip = house.get("zip");
+			assert houseZip != null;
+			Object houseCity = house.get("city");
+			assert houseCity != null;
+			Object houseState = house.get("state");
+			assert houseState != null;
+			Object houseLocation = house.get("location");
+			assert houseLocation != null;
+			Object houseBedrooms = house.get("bedrooms");
+			assert houseBedrooms != null;
+			Object houseBathrooms = house.get("bathrooms");
+			assert houseBathrooms != null;
+			Object houseListDate = house.get("list_date");
+			assert houseListDate != null;
+			Object houseMlsUpdateDate = house.get("mls_update_date");
+			assert houseMlsUpdateDate != null;
+			Object housePriceDisplay = house.get("price_display");
+			assert housePriceDisplay != null;
+			Object housePrice = house.get("price");
+			assert housePrice != null;
+			Object houseSquareFeet = house.get("square_feet");
+			assert houseSquareFeet != null;
 			
 			
 		}
