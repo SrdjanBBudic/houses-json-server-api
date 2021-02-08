@@ -34,7 +34,6 @@ public class HousesTestSuite {
 		JSONArray houses = rawStringToJsonArray(housesRaw);
 
 		
-		
 		for(int i = 0; i < houses.length(); i++) {
 			JSONObject house = houses.getJSONObject(i);
 			
@@ -114,6 +113,65 @@ public class HousesTestSuite {
 		JSONArray houses = rawStringToJsonArray(housesRaw);
 		assertEquals(houses.length(), 0);
 	
+	}
+	
+	
+	
+	@Test
+	public void housesCheckOnlyMaximumPriceRange() {
+		
+		String housesRaw = given()
+				   .queryParam("price_lte", "900000")
+	               .queryParam("city", "Austin")
+	               .when().get("houses")
+	               .then().assertThat().statusCode(200).extract().response().asString();
+		
+		
+		JSONArray houses = rawStringToJsonArray(housesRaw);
+		
+		
+		for(int i = 0; i < houses.length(); i++) {
+			JSONObject house = houses.getJSONObject(i);
+			
+			assertTrue(house.getInt("price") <= 900000);
+		}
+	}
+	
+	
+	
+	@Test
+	public void housesCheckOnlyMinimumPriceRange() {
+		
+		String housesRaw = given()
+	               .queryParam("price_gte", "200000")
+	               .queryParam("city", "Austin")
+	               .when().get("houses")
+	               .then().assertThat().statusCode(200).extract().response().asString();
+		
+		
+		JSONArray houses = rawStringToJsonArray(housesRaw);
+		
+		
+		for(int i = 0; i < houses.length(); i++) {
+			JSONObject house = houses.getJSONObject(i);
+			
+			assertTrue(200000 <=  house.getInt("price"));
+		}
+	}
+	
+	
+	
+	@Test
+	public void housesCheckWhenAWrongQueryParamValueIsBeingSent() {
+		//Explanation why this one is failing:
+		//When sending a request I wanted to test the response of a server when a query parameter gets invalid characters,
+		//Due to invalid parameters I expect to get the "statusCode(400)" due to request not being able to be processed 
+		String housesRaw = given()
+	               .queryParam("price_gte", "dwqdqwdqw")
+	               .queryParam("city", "Austin")
+	               .when().get("houses")
+	               .then().assertThat().statusCode(400).extract().response().asString();
+		
 	}
 	
 	
